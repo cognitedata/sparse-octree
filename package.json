@@ -1,59 +1,52 @@
 {
-	"name": "sparse-octree",
-	"version": "4.3.0",
+	"name": "@cognite/sparse-octree",
+	"version": "4.3.2",
 	"description": "A sparse octree data structure.",
-	"homepage": "https://github.com/vanruesc/sparse-octree",
+	"homepage": "https://github.com/cognitedata/sparse-octree",
 	"main": "build/sparse-octree.js",
-	"module": "src/index.js",
+	"module": "build/sparse-octree.js",
 	"sideEffects": false,
 	"license": "Zlib",
-
 	"keywords": [
 		"partition",
 		"hierarchy",
 		"subdivision",
 		"raycasting",
-		"3d", "spatial",
-		"voxel", "points",
-		"frustum", "culling"
+		"3d",
+		"spatial",
+		"voxel",
+		"points",
+		"frustum",
+		"culling"
 	],
-
 	"author": {
 		"name": "Raoul van Rüschen",
 		"email": "vanruesc@outlook.de"
 	},
-
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/vanruesc/sparse-octree.git"
 	},
-
 	"bugs": {
 		"url": "https://github.com/vanruesc/sparse-octree/issues"
 	},
-
 	"files": [
 		"src",
 		"build"
 	],
-
 	"scripts": {
 		"test": "grunt --production"
 	},
-
 	"engines": {
 		"node": ">=4.0.0"
 	},
-
 	"eslintConfig": {
 		"extends": "delta"
 	},
-
 	"dependencies": {
 		"iterator-result": "0.x.x",
 		"math-ds": "0.x.x"
 	},
-
 	"devDependencies": {
 		"babel-core": "6.x.x",
 		"babel-plugin-external-helpers": "6.x.x",
@@ -63,9 +56,9 @@
 		"eslint-config-delta": "0.x.x",
 		"grunt": "1.x.x",
 		"grunt-cli": "1.x.x",
+		"grunt-contrib-copy": "1.x.x",
 		"grunt-contrib-nodeunit": "2.x.x",
 		"grunt-contrib-uglify": "3.x.x",
-		"grunt-contrib-copy": "1.x.x",
 		"grunt-eslint": "20.x.x",
 		"grunt-plugin-esdoc": "1.x.x",
 		"grunt-rollup": "9.x.x",
