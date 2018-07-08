@@ -4,15 +4,6 @@ import { PointOctant } from "./PointOctant.js";
 import { RayPointIntersection } from "./RayPointIntersection.js";
 
 /**
- * A vector.
- *
- * @type {Vector3}
- * @private
- */
-
-const v = new Vector3();
-
-/**
  * A threshold for distance comparisons.
  *
  * @type {Number}
@@ -268,7 +259,8 @@ function fetch(point, octree, octant) {
  * @param {Vector3} position - The new position.
  * @param {Octree} octree - The octree.
  * @param {Octant} octant - The current octant.
- * @param {Octant} octant - The parent of the current octant.
+ * @param {Octant} parent - The parent of the current octant.
+ * @param {Number} depth - The current depth.
  * @return {Object} The data entry of the updated point or null if it didn't exist.
  */
 
@@ -360,8 +352,8 @@ function findNearestPoint(point, maxDistance, skipSelf, octant) {
 
 	if(children !== null) {
 
-		// Sort the children.
-		sortedChildren = children.map(function(child) {
+		// Sort the children: smallest distance to the point first, ASC.
+		sortedChildren = children.map((child) => {
 
 			// Precompute distances.
 			return {
@@ -369,12 +361,7 @@ function findNearestPoint(point, maxDistance, skipSelf, octant) {
 				distance: child.distanceToCenterSquared(point)
 			};
 
-		}).sort(function(a, b) {
-
-			// Smallest distance to the point first, ASC.
-			return a.distance - b.distance;
-
-		});
+		}).sort((a, b) => a.distance - b.distance);
 
 		// Traverse from closest to furthest.
 		for(i = 0, l = sortedChildren.length; i < l; ++i) {
@@ -523,7 +510,6 @@ export class PointOctree extends Octree {
 		 *
 		 * @type {Number}
 		 * @private
-		 * @default 0.0
 		 */
 
 		this.bias = Math.max(0.0, bias);
@@ -537,7 +523,6 @@ export class PointOctree extends Octree {
 		 *
 		 * @type {Number}
 		 * @private
-		 * @default 8
 		 */
 
 		this.maxPoints = Math.max(1, Math.round(maxPoints));
@@ -551,7 +536,6 @@ export class PointOctree extends Octree {
 		 *
 		 * @type {Number}
 		 * @private
-		 * @default 8
 		 */
 
 		this.maxDepth = Math.max(0, Math.round(maxDepth));
@@ -725,7 +709,7 @@ export class PointOctree extends Octree {
 
 					if(rayPointDistanceSq < thresholdSq) {
 
-						intersectPoint = raycaster.ray.closestPointToPoint(point, v);
+						intersectPoint = raycaster.ray.closestPointToPoint(point, new Vector3());
 						distance = raycaster.ray.origin.distanceTo(intersectPoint);
 
 						if(distance >= raycaster.near && distance <= raycaster.far) {
