@@ -22,7 +22,7 @@ export class Octant {
 	 * @param {Vector3} [max] - The upper bounds.
 	 */
 
-	constructor(min = new Vector3(), max = new Vector3()) {
+	constructor(min = new Vector3(), max = new Vector3(), parent) {
 
 		/**
 		 * The lower bounds of this octant.
@@ -39,6 +39,10 @@ export class Octant {
 		 */
 
 		this.max = max;
+
+		this.parent = parent;
+
+		this.depth = parent ? parent.depth + 1 : 0;
 
 		/**
 		 * The children of this octant.
@@ -114,8 +118,9 @@ export class Octant {
 					(combination[0] === 0) ? mid.x : max.x,
 					(combination[1] === 0) ? mid.y : max.y,
 					(combination[2] === 0) ? mid.z : max.z
-				)
+				),
 
+				this
 			);
 
 		}
