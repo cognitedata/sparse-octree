@@ -1,6 +1,6 @@
 {
 	"name": "@cognite/sparse-octree",
-	"version": "4.3.2",
+	"version": "4.3.3",
 	"description": "A sparse octree data structure.",
 	"homepage": "https://github.com/cognitedata/sparse-octree",
 	"main": "build/sparse-octree.js",
